@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>CRAWLING FORM</h3>
+    <form id="crawlingForm">
+        <table>
+            <tr>
+                <th>url</th>
+                <td><input type="text" name="url"></td>
+            </tr>
+            <tr>
+                <th>name</th>
+                <td><input type="text" name="name"></td>
+            </tr>
+        </table>
+        <button type="button" id="saveBtn">실행</button>
+    </form>
+</body>
+</html>
+<script>
+    'use strict';
+    let crawlingForm = (function () {
+        let documentSetting = function () {
+            document.getElementById('saveBtn').addEventListener("click", function () {
+               save();
+            });
+        }
+        let setFormData = function () {
+            let formData = new FormData(document.getElementById('crawlingForm'));
+            return formData;
+        }
+        let save = function () {
+            let formData = setFormData();
+            let options = {
+                method : 'POST',
+                body : formData
+            }
+            fetch('/crawling', options)
+                .then(response => response.json())
+                .then((json) => {
+                    if (json['code'] == '200') {
+                        alert('성공적으로 저장되었습니다.');
+                        location.href = '/'
+                    }
+                });
+        }
+        return {
+            init:documentSetting
+        }
+    })();
+    document.addEventListener('DOMContentLoaded', function () {
+       crawlingForm.init();
+    });
+</script>
