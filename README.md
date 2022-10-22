@@ -9,7 +9,7 @@
   </tr>
   <tr>
     <th>IDE</th>
-    <td>Pycharm</td>
+    <td>VScode</td>
   </tr>
   <tr>
     <th>Framework</th>
