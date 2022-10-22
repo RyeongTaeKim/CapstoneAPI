@@ -10,7 +10,15 @@
         <table>
             <tr>
                 <th>file</th>
-                <td><input type="file" multiple="multiple" name="file"></td>
+                <td><input type="file" multiple="multiple" name="file[]"></td>
+            </tr>
+            <tr>
+                <th>item file</th>
+                <td><input type="file" name="ppl_file"></td>
+            </tr>
+            <tr>
+                <th>item url</th>
+                <td><input type="text" name="item_url"></td>
             </tr>
         </table>
         <button type="button" id="saveBtn">실행</button>
@@ -22,7 +30,7 @@
     let detectionForm = (function () {
         let documentSetting = function () {
             document.getElementById('saveBtn').addEventListener("click", function () {
-               save(); 
+               save();
             });
         }
         let setFormData = function () {
@@ -40,10 +48,7 @@
                 .then((json) => {
                     if (json['code'] == '200') {
                         alert('성공적으로 저장되었습니다.');
-                        location.href = '/'
-                    }
-                    else {
-                        alert(json['message']);
+                        location.href = `/cartoon_view?dir_name=${json['dir_name']}&detected_image_list=${json['detected_image_list']}&ppl_data=${json['ppl_data']}&item_url=${json['item_url']}`;
                     }
                 });
         }

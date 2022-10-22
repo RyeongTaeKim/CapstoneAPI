@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>CARTOON PAGE</h3>
+    <h4 id="title">{{ dir_name }}</h4>
+    <div id="container">
+        <div id="content">
+            <div id="comicViewArea">
+                {% for file in file_list %}
+                    <img src="../static/{{ dir_name }}/{{ file }}" id="{{ file }}" alt="">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    "use strict";
+    let cartoonView = (function () {
+        let documentSetting = function () {
+            let url = new URL(window.location.href);
+            let detectedImageListString = url.searchParams.get('detected_image_list');
+            let detectedImageList = detectedImageListString.split(',');
+            let pplData = url.searchParams.get('ppl_data');
+            let itemUrl = url.searchParams.get('item_url');
+
+            let popup;
+            document.querySelectorAll('img').forEach((el) => {
+                el.addEventListener("click", function () {
+                    for (const e of detectedImageList) {
+                        if (el.id === e) {
+                            console.log(el.id)
+                            let windowFeatures = "width=500, height=300, top=200, left=200, popup";
+                            popup = window.open(`ppl_view?ppl_data=${pplData}&item_url=${itemUrl}`, 'ppl_pop', windowFeatures);
+                        }
+                    }
+                });
+            });
+        }
+
+
+        return {
+            init:documentSetting
+        }
+    })();
+    document.addEventListener("DOMContentLoaded", function () {
+        cartoonView.init();
+    });
+</script>
