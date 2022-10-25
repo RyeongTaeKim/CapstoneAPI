@@ -22,6 +22,7 @@ def crawling_form():
 def crawling():
     data = request.form
     crawl_cartoon(data['url'], data['name'])
+    os.chdir("..")
     return jsonify({'code':'200'})
 
 @app.route('/detection_form')
@@ -37,7 +38,7 @@ def detection():
     dir_name = '프리드로우/제457화 킹 안드레 (2)'
     for el in data:
         extension = "." + el.filename.split('.')[-1]
-        print(el.filename)
+        print(os.getcwd())
         if extension in ALLOWED_EXTENSIONS:
             el.save('./image/{0}'.format(secure_filename(el.filename)))
             cartoon_img = cv2.imread('./image/{0}'.format(secure_filename(el.filename)))
@@ -59,7 +60,10 @@ def detection():
 def cartoon_view():
     dir_name = request.values.get('dir_name')
     path = os.getcwd() + '/' + 'static/' + dir_name
+    print(path)
     file_list = os.listdir(path)
+    file_list.sort(key=lambda x: int(x.split('.')[0].split('_')[-1]))
+    print(file_list)
     return render_template('cartoon_view.html', dir_name = dir_name, file_list = file_list)
 
 @app.route('/ppl_view', methods=['GET'])

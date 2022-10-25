@@ -3,11 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h3>PPL PAGE</h3>
+<div class="container-fluid p-3 my-3 bg-dark text-white">
+    <h1>PPL Page</h1>
+    <p>This is some text.</p>
+</div>
+<div class="container">
     <img src="../static/상품/{{ ppl_data }}" alt="">
-    <a href="{{ item_url }}">구매링크 click</a>
-    <button type="button" onclick="window.close()">창닫기</button>
+</div>
+<div class="container">
+{#    <a href="{{ item_url }}">구매링크 click</a>#}
+    <button type="button" class="btn btn-secondary btn-block" onclick="location.href='{{ item_url }}'">Purchase Link</button>
+    <button type="button" class="btn btn-warning btn-block" onclick="window.close()">Close</button>
+</div>
 </body>
 </html>

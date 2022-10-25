@@ -64,3 +64,4 @@ def crawl_cartoon(url, series_title):
 
             # 한 회차 이미지 저장 완료!
             print((t.text).strip() + "  saved completely!")
+    os.chdir("..")
